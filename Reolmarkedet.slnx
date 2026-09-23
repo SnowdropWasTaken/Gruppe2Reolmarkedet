@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Reolmarkedet.Core/Reolmarkedet.Core.csproj" />
+  <Project Path="Reolmarkedet.UI/Reolmarkedet.UI.csproj" />
+</Solution>
