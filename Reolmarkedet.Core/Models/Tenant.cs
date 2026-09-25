@@ -6,7 +6,7 @@ public class Tenant
 
     public string Name
     {
-        get { return _name; }
+        get => _name;
     }
     
     
@@ -14,7 +14,7 @@ public class Tenant
 
     public string Email
     {
-        get { return _email; }
+        get => _email;
         set
         {
             if (value != null && value.Contains("@") && value.Contains("."))
@@ -34,7 +34,7 @@ public class Tenant
 
     public string Phone
     {
-        get { return _phone; }
+        get => _phone;
         set
         {
             if (value != null && value.Length > 7)
@@ -54,7 +54,7 @@ public class Tenant
 
     public string RegNumber
     {
-        get { return _regNumber; }
+        get => _regNumber;
     }
     
     
@@ -62,7 +62,7 @@ public class Tenant
 
     public string BankNumber
     {
-        get { return _bankNumber; }
+        get => _bankNumber;
     }
     
     
