@@ -50,7 +50,7 @@ public class Tenant
     }
     
     
-    private string _regNumber;
+    private string? _regNumber;
 
     public string RegNumber
     {
@@ -58,7 +58,7 @@ public class Tenant
     }
     
     
-    private string _bankNumber;
+    private string? _bankNumber;
 
     public string BankNumber
     {
@@ -86,7 +86,14 @@ public class Tenant
 
     public void AddLease(Lease lease)
     {
-        _leases.Add(lease);
+        if (_regNumber != null && _bankNumber != null)
+        {
+            _leases.Add(lease);
+        }
+        else
+        {
+            throw new ArgumentException("Bank information is missing");
+        }
     }
 
     public void RemoveLease(Lease lease)
