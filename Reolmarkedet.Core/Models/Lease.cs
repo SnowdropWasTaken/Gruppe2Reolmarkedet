@@ -37,14 +37,34 @@ public class Lease
         get => _cancellationDate;
         set
         {
-            if (value != null && value > DateTime.Now)
+            // Awful nesting incoming
+            if (value.HasValue)
             {
-                // CancelationDate the day it was cancelled or the day they dont have it anymore?
-                _cancellationDate = value;
+                if (value.Value.Month == DateTime.Now.Month)
+                {
+                    if (value.Value.Day < 20)
+                    {
+                        // Last day of the month
+                        _cancellationDate = new DateTime(value.Value.Year, value.Value.Month,
+                            DateTime.DaysInMonth(value.Value.Year, value.Value.Month));
+                    }
+                    else
+                    {
+                        // Last day of next month
+                        _cancellationDate = new DateTime(value.Value.Year, value.Value.Month + 1,
+                            DateTime.DaysInMonth(value.Value.Year, value.Value.Month + 1));
+                    }
+                }
+                else
+                {
+                    // Last day of the set month
+                    _cancellationDate = new DateTime(value.Value.Year, value.Value.Month,
+                        DateTime.DaysInMonth(value.Value.Year, value.Value.Month));
+                }
             }
             else
             {
-                throw new ArgumentException("Cancellation date cant be before today");
+                throw new ArgumentException("Cancellation date must be a date, to be set");
             }
         }
     }
