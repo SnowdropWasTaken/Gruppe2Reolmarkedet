@@ -55,6 +55,17 @@ public class Tenant
     public string RegNumber
     {
         get => _regNumber;
+        set {
+            // Check to see if its actually a number
+            if (int.TryParse(value, out int result))
+            {
+                _regNumber = value;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid registration number");
+            }
+        }
     }
     
     
@@ -63,6 +74,17 @@ public class Tenant
     public string BankNumber
     {
         get => _bankNumber;
+        set {
+            // Check to see if its actually a number
+            if (int.TryParse(value, out int result))
+            {
+                _bankNumber = value;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid bank number");
+            }
+        }
     }
     
     
@@ -86,6 +108,7 @@ public class Tenant
 
     public void AddLease(Lease lease)
     {
+        // Bank info has to be present
         if (_regNumber != null && _bankNumber != null)
         {
             _leases.Add(lease);
