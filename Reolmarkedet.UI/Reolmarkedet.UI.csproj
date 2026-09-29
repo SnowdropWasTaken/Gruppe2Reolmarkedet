@@ -8,4 +8,11 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\RM-logo.png" />
+    <Resource Include="Assets\RM-logo.png" />
+    <None Remove="Assets\RM-logo.svg" />
+    <Resource Include="Assets\RM-logo.svg" />
+  </ItemGroup>
+
 </Project>
