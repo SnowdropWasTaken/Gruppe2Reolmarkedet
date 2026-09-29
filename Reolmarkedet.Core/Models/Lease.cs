@@ -2,6 +2,7 @@
 
 public class Lease
 {
+    public int Id;
     private DateTime _startDate;
     
     private double _price;
@@ -20,14 +21,6 @@ public class Lease
                 throw new ArgumentException("Price must be greater than zero");
             }
         }
-    }
-
-    private bool _status;
-
-    public bool Status
-    {
-        get => _status;
-        set => _status = value;
     }
     
     private DateTime? _cancellationDate;
@@ -76,12 +69,19 @@ public class Lease
         get => _shelf;
     }
 
-    public Lease(DateTime startDate, double price, bool status, Shelf shelf, DateTime? cancellationDate = null)
+    private Tenant _tenant;
+
+    public Tenant Tenant
+    {
+        get => _tenant;
+    }
+
+    public Lease(DateTime startDate, double price, Shelf shelf, Tenant tenant, DateTime? cancellationDate = null)
     {
         _startDate = startDate;
         Price = price;
-        Status = status;
         _shelf = shelf;
+        _tenant = tenant;
         if (cancellationDate != null)
         {
             CancellationDate = cancellationDate;
