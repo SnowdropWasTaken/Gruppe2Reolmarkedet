@@ -2,6 +2,8 @@
 
 public class Tenant
 {
+    public int Id;
+    
     private string _name;
 
     public string Name

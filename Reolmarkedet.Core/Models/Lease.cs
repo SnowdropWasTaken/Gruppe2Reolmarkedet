@@ -2,6 +2,7 @@
 
 public class Lease
 {
+    public int Id;
     private DateTime _startDate;
     
     private double _price;
