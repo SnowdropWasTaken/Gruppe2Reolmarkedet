@@ -21,14 +21,6 @@ public class Lease
             }
         }
     }
-
-    private bool _status;
-
-    public bool Status
-    {
-        get => _status;
-        set => _status = value;
-    }
     
     private DateTime? _cancellationDate;
 
@@ -83,11 +75,10 @@ public class Lease
         get => _tenant;
     }
 
-    public Lease(DateTime startDate, double price, bool status, Shelf shelf, Tenant tenant, DateTime? cancellationDate = null)
+    public Lease(DateTime startDate, double price, Shelf shelf, Tenant tenant, DateTime? cancellationDate = null)
     {
         _startDate = startDate;
         Price = price;
-        Status = status;
         _shelf = shelf;
         _tenant = tenant;
         if (cancellationDate != null)
