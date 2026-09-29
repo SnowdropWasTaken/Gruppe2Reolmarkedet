@@ -86,9 +86,6 @@ public class Tenant
             }
         }
     }
-    
-    
-    private List<Lease> _leases = new List<Lease>();
 
     public Tenant(string name, string email, string phone, string regNumber, string bankNumber)
     {
@@ -104,28 +101,5 @@ public class Tenant
         _name = name;
         Email = email;
         Phone = phone;
-    }
-
-    public void AddLease(Lease lease)
-    {
-        // Bank info has to be present
-        if (_regNumber != null && _bankNumber != null)
-        {
-            _leases.Add(lease);
-        }
-        else
-        {
-            throw new ArgumentException("Bank information is missing");
-        }
-    }
-
-    public void RemoveLease(Lease lease)
-    {
-        _leases.Remove(lease);
-    }
-
-    public IEnumerable<Lease> Leases()
-    {
-        return new List<Lease>(_leases);
     }
 }
