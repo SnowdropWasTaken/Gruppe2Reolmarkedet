@@ -11,6 +11,7 @@ namespace Reolmarkedet.Core.Repositories
         private List<Tenant> _tenants = new List<Tenant>();
         private int _nextId = 1;
 
+        
         public Tenant? GetById(int tenantID)
         {
             //vi har ikke tilføjet tenantID endnu - hvis ikke skal der rettes i ITenantRepository GetById.
@@ -27,9 +28,11 @@ namespace Reolmarkedet.Core.Repositories
         }
 
         public void AddTenant(Tenant tenant)
-        {
+        {   
             tenant.TenantID = _nextId++;
+            _tenants.Add(tenant);
         }
+
         public void UpdateTenant(Tenant tenant)
         {
             var existingTenant = GetById(tenant.TenantID);
