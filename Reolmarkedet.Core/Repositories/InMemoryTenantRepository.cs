@@ -14,17 +14,14 @@ namespace Reolmarkedet.Core.Repositories
         
         public Tenant? GetById(int tenantID)
         {
-            //vi har ikke tilføjet tenantID endnu - hvis ikke skal der rettes i ITenantRepository GetById.
+            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
             return _tenants.Find(t => t.TenantID == tenantID);
         }
 
         public List<Tenant> GetAll()
         {   //Skal tilføje firstname og last name til Tenant klassen, så vi kan sortere på det.
             //LINQ er blevet brugt - da vi vil koble db 
-            return _tenants
-            .OrderBy(t => t.LastName)
-            .ThenBy(t => t.FirstName)
-            .ToList();
+            return new List<Tenant>(_tenants);
         }
 
         public void AddTenant(Tenant tenant)

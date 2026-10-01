@@ -8,7 +8,7 @@ namespace Reolmarkedet.Core.Interfaces
     public interface IShelfRepository
     {
 
-        Shelf GetById(int shelfId);
+        Shelf GetById(int shelfID);
         List<Shelf> GetAll();
         void AddShelf(Shelf shelf);
         void UpdateShelf(Shelf shelf);

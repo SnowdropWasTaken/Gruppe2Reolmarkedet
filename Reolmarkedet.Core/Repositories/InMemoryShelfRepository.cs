@@ -6,31 +6,47 @@ using System.Text;
 
 namespace Reolmarkedet.Core.Repositories
 {
-    internal class InMemoryShelfRepository : IShelfRepository
+    public class InMemoryShelfRepository : IShelfRepository
     {
-        public Shelf GetById(int shelfId)
+        private List<Shelf> _shelves = new List<Shelf>();
+        private int _nextId = 1;
+
+
+        public Shelf GetById(int shelfID)
         {
-            throw new NotImplementedException();
+            //Vi har ikke tilføjet shelfID til klassen Shelf endnu.
+            return _shelves.Find(s => s.shelfID == shelfID);
         }
 
         public List<Shelf> GetAll()
         {
-            throw new NotImplementedException();
+            return _shelves
+                .OrderBy(s => s.ShelfName)
+                .ThenBy(s => s.ShelfType)
+                .ToList();
         }
 
         public void AddShelf(Shelf shelf)
         {
-            throw new NotImplementedException();
+            shelf.ShelfID = _nextId++;
+            _shelves.Add(shelf);    
         }
 
         public void UpdateShelf(Shelf shelf)
         {
-            throw new NotImplementedException();
+            var existingShelf = _shelves.Find(s => s.ShelfID == shelf.ShelfID);
+            if (existingShelf != null) { 
+            
+            }  
         }
 
         public void RemoveShelf(int shelfID)
         {
-            throw new NotImplementedException();
+            var existingShelf = GetById(shelfID);
+            if (existingShelf != null)
+            {
+                _shelves.Remove(existingShelf);
+            }
         }
 
     }

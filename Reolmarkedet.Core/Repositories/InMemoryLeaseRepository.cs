@@ -12,29 +12,44 @@ namespace Reolmarkedet.Core.Repositories
         private int _nextId = 1;
 
 
-        public Lease GetById(int leaseId)
+        public Lease GetById(int leaseID)
         {
-            throw new NotImplementedException();
+            return _leases.Find(l => l.LeaseID == leaseID);
         }
 
         public List<Lease> GetAll()
         {
-            throw new NotImplementedException();
+            return new List<Lease>(_leases);
+                  
         }
 
         public void AddLease(Lease lease)
         {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveLease(int leaseId)
-        {
-            throw new NotImplementedException();
+            lease.LeaseID = _nextId++;
+            _leases.Add(lease);
         }
 
         public void UpdateLease(Lease lease)
         {
-            throw new NotImplementedException();
+            var existingLease = GetById(lease.LeaseID);
+            if (existingLease != null)
+            {
+                existingLease.TenantID = lease.TenantID;
+                existingLease.ShelfID = lease.ShelfID;
+                existingLease.StartDate = lease.StartDate;
+                existingLease.EndDate = lease.EndDate;
+            }
         }
+
+        public void RemoveLease(int leaseId)
+        {
+            var lease = GetById(leaseId);   // Find the lease by ID
+            if (lease != null)              // Hvis der er et match slettes lease 
+            {
+                _leases.Remove(lease);
+            }
+        }
+
+
     }
 }
