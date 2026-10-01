@@ -2,7 +2,7 @@
 
 public class Tenant
 {
-    public int Id;
+    public int ID;
     
     private string _name;
 
@@ -30,7 +30,6 @@ public class Tenant
             }
         }
     }
-    
     
     private string _phone;
 

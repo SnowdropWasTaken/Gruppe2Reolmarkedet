@@ -2,10 +2,10 @@
 
 public class Shelf
 {
-    public int Id;
+    public int ID;
     public string ShelfName;
     public ShelfType ShelfType;
-    public bool Status;
+    public bool Status = false;
 
     public Shelf(string shelfName, ShelfType shelfType)
     {
