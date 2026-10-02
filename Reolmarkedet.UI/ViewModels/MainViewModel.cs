@@ -4,34 +4,55 @@ using System.Text;
 
 namespace Reolmarkedet.UI.ViewModels
 {
+    /// <summary>
+    /// MainViewModel er den viewmodel, som holder styr på hvilken viewmodel der skal vises i MainWindow.xaml
+    /// Klassen arver fra ViewModelBase, som får agang til funktionaliteten i ViewModelBase.
+    /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        //Feltet gemmer den aktive viewmodel, som skal vises i MainWindow.xaml
+        //Typen er ViewModelbase, feltet kan indeholde alle viewmodels, som arver fra ViewModelBase
+        private ViewModelBase _currentViewModel;
 
-        //Ingen startside er valgt endnu - når vi oprettet en startside, kan vi rette til, at den ikke kan være null. 
-        // ? sat efter ViewModelBase for at indikere at den kan være null.
-        private ViewModelBase? _currentViewModel;
-        public ViewModelBase? CurrentViewModel
+        //Property giver adgang til den aktive ViewModel.
+        //Get returner ViewModel som ligger i feltet.
+        //Set bliver kørt når der skiftes viewmodel, og sætter feltet til den nye viewmodel,
+        //_currentViewModel gemmner den nye viewModel som gemmens i værdien value
+        //OnPropertyChanged() giver besked at CurrentViewModel er ændret
+        //OnPropertyChanged(nameof(WindowTitle)) giver besked om at UI også skal læse windowTitle igen
+        //uden WindowTitle ville titlen på vinduet ikke ændre sig når man skifter viewmodel
+        public ViewModelBase CurrentViewModel
         {
-            get { return _currentViewModel; }
+            get => _currentViewModel;
             set
             {
-                if (_currentViewModel == value)
-                {
-                    return; 
+                _currentViewModel = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(WindowTitle));
 
-                    _currentViewModel = value;
-                    OnPropertyChanged();
-                }
             }
         }
 
-        //Når vi har opettet en startside, kan vi fjerne kommenteringen af denne constructor.
-        //Går udfra startsiden er HomeViewModel.
+        public string WindowTitle
+        {
+            get
+            {
+                return CurrentViewModel switch
+                {
+                    HomeViewModel => "Home",
+                    ShelfViewModel => "Shelves",
+                    LeaseViewModel => "Leases",
+                    TenantViewModel => "Tenants",
+                    _ => "Home"
+                };
+            }
+        }
 
-        //public MainViewModel()
-        //{ 
-        //    CurrentViewModel = new HomeViewModel();
-        // }
+        //Constructor vælger start viewmodel, som er HomeViewModel
+        public MainViewModel()
+        {
+            CurrentViewModel = new HomeViewModel();
+        }
 
 
     }

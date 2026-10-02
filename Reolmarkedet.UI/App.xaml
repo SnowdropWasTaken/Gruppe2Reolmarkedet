@@ -11,6 +11,13 @@
         <DataTemplate DataType="{x:Type viewModels:ShelfOverviewViewModel}">
             <local:MainWindow />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:LeaseOverViewViewModel}">
+            <local:MainWindow />
+        </DataTemplate>     
+        <DateTemplate Datatype="{x:Type viewModels:TenantViewModel}">
+            <local:MainWindow />
+        </DateTemplate>
+
         <!--Tilføj lease, tenant ... når de bliver oprettet-->
     </Application.Resources>
 </Application>

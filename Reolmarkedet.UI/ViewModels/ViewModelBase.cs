@@ -10,6 +10,11 @@ namespace Reolmarkedet.UI.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        //OnPropertyChanged() metoden kaldes property ændres for at give UI besked om ændring
+        //[CallerMemberName] = indsætter automatisk navnet på property
+        //string Name = null = gør parameteren valgfri, så vi kan kalde metoden uden et arguement
+        //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name)) = kalder PropertyChanged eventet 
+        //og sender besked om hvilken property der er ændret til UI
         protected void OnPropertyChanged([CallerMemberName] string Name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
