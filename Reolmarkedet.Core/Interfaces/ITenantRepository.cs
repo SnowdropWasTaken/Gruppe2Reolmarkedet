@@ -7,7 +7,8 @@ namespace Reolmarkedet.Core.Interfaces
 {
     public interface ITenantRepository
     {
-        Tenant? GetById(int tenantID);
+        Tenant? Get(int tenantID);
+        Tenant? Get(string searchTerm);
         
         List<Tenant> GetAll();
         

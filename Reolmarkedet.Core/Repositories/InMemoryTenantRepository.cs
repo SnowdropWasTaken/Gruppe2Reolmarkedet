@@ -12,12 +12,18 @@ namespace Reolmarkedet.Core.Repositories
         private int _nextId = 1;
 
         
-        public Tenant? GetById(int tenantID)
+        public Tenant? Get(int tenantID)
         {
             //vi har ikke tilføjet tenantID til klassen Tenant endnu 
-            return _tenants.Find(t => t.TenantID == tenantID);
+            return _tenants.Find(t => t.ID == tenantID);
         }
 
+        public Tenant? Get(string searchTerm)
+        {
+            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
+            return new Tenant("","","");
+        }
+        
         public List<Tenant> GetAll()
         {   //Skal tilføje firstname og last name til Tenant klassen, så vi kan sortere på det.
             //LINQ er blevet brugt - da vi vil koble db 
@@ -26,13 +32,13 @@ namespace Reolmarkedet.Core.Repositories
 
         public void AddTenant(Tenant tenant)
         {   
-            tenant.TenantID = _nextId++;
+            tenant.ID = _nextId++;
             _tenants.Add(tenant);
         }
 
         public void UpdateTenant(Tenant tenant)
         {
-            var existingTenant = GetById(tenant.TenantID);
+            var existingTenant = Get(tenant.ID);
             if (existingTenant != null) {
                 existingTenant.FirstName = tenant.FirstName;
                 existingTenant.LastName = tenant.LastName;
@@ -45,7 +51,7 @@ namespace Reolmarkedet.Core.Repositories
         }
         public void RemoveTenant(int tenantID)
         {
-            var existingTenant = GetById(tenantID);
+            var existingTenant =  Get(tenantID);
             if (existingTenant != null)
                 _tenants.Remove(existingTenant);
             
