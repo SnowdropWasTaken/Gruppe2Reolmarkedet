@@ -1,5 +1,6 @@
 ﻿using Reolmarkedet.Core.Interfaces;
 using Reolmarkedet.Core.Models;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,35 +13,38 @@ namespace Reolmarkedet.Core.Repositories
         private int _nextId = 1;
 
 
-        public Shelf GetById(int shelfID)
+        public Shelf? GetById(int shelfID)
         {
-            //Vi har ikke tilføjet shelfID til klassen Shelf endnu.
-            return _shelves.Find(s => s.shelfID == shelfID);
+            return _shelves.Find(s => s.ShelfId == shelfID);
         }
 
         public List<Shelf> GetAll()
         {
             return _shelves
                 .OrderBy(s => s.ShelfName)
-                .ThenBy(s => s.ShelfType)
+                .ThenBy(s => s.ShelfType.Name)
                 .ToList();
         }
 
-        public void AddShelf(Shelf shelf)
+        public int Insert(Shelf shelf)
         {
-            shelf.ShelfID = _nextId++;
-            _shelves.Add(shelf);    
+            shelf.ShelfId = _nextId++;
+            _shelves.Add(shelf);
+            return shelf.ShelfId;
         }
 
-        public void UpdateShelf(Shelf shelf)
+        public void Update(Shelf shelf)
         {
-            var existingShelf = _shelves.Find(s => s.ShelfID == shelf.ShelfID);
-            if (existingShelf != null) { 
-            
-            }  
+            var existingShelf = _shelves.Find(s => s.ShelfId == shelf.ShelfId);
+            if (existingShelf != null)
+            {
+                existingShelf.ShelfName = shelf.ShelfName;
+                existingShelf.ShelfType = shelf.ShelfType;
+                existingShelf.Status = shelf.Status;
+            }
         }
 
-        public void RemoveShelf(int shelfID)
+        public void Delete(int shelfID)
         {
             var existingShelf = GetById(shelfID);
             if (existingShelf != null)

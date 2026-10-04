@@ -2,7 +2,7 @@
 
 public class Shelf
 {
-    public int ID;
+    public int ShelfId;
     public string ShelfName;
     public ShelfType ShelfType;
     public bool Status = false;

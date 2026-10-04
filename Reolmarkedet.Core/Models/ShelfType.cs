@@ -2,7 +2,7 @@
 
 public class ShelfType
 {
-    public int ID;
+    public int ShelfTypeId;
     private string _name;
 
     public string Name

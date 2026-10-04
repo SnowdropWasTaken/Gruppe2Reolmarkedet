@@ -12,46 +12,48 @@ namespace Reolmarkedet.Core.Repositories
         private int _nextId = 1;
 
         
-        public Tenant? Get(int tenantID)
+        public Tenant? GetById(int tenantID)
         {
-            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
-            return _tenants.Find(t => t.ID == tenantID);
+            return _tenants.Find(t => t.TenantId == tenantID);
         }
 
-        public Tenant? Get(string searchTerm)
+        public Tenant? GetByPhone(string phone)
         {
-            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
-            return new Tenant("","","");
+            return _tenants.Find(t => t.Phone == phone);
+        }
+
+        public List<Tenant>? Search(string searchTerm)
+        {
+            return new List<Tenant>(_tenants.Where(t => t.FirstName.Contains(searchTerm) || t.LastName.Contains(searchTerm))).ToList();
         }
         
         public List<Tenant> GetAll()
         {   //Skal tilføje firstname og last name til Tenant klassen, så vi kan sortere på det.
             //LINQ er blevet brugt - da vi vil koble db 
-            return new List<Tenant>(_tenants);
+            return new List<Tenant>(_tenants).ToList();
         }
 
-        public void AddTenant(Tenant tenant)
+        public int Insert(Tenant tenant)
         {   
-            tenant.ID = _nextId++;
+            tenant.TenantId = _nextId++;
             _tenants.Add(tenant);
+            return tenant.TenantId;
         }
 
-        public void UpdateTenant(Tenant tenant)
+        public void Update(Tenant tenant)
         {
-            var existingTenant = Get(tenant.ID);
+            var existingTenant = GetById(tenant.TenantId);
             if (existingTenant != null) {
                 existingTenant.FirstName = tenant.FirstName;
                 existingTenant.LastName = tenant.LastName;
                 existingTenant.Email = tenant.Email;
-                existingTenant.Phone = tenant.Phone;    
-                existingTenant.RegNumber = tenant.RegNumber;
-                existingTenant.BankNumber = tenant.BankNumber;
+                existingTenant.Phone = tenant.Phone;
 
             }
         }
-        public void RemoveTenant(int tenantID)
+        public void Delete(int tenantID)
         {
-            var existingTenant =  Get(tenantID);
+            var existingTenant =  GetById(tenantID);
             if (existingTenant != null)
                 _tenants.Remove(existingTenant);
             

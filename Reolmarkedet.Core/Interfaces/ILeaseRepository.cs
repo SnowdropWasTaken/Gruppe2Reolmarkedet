@@ -7,11 +7,11 @@ namespace Reolmarkedet.Core.Interfaces
 {
     public interface ILeaseRepository
     {
-        Lease GetById(int leaseId);
+        Lease? GetById(int leaseId);
         List<Lease> GetAll();
-        void AddLease(Lease lease);
-        void UpdateLease(Lease lease);
-        void RemoveLease(int leaseId);
+        int Insert(Lease lease);
+        void Update(Lease lease);
+        void Delete(int leaseId);
 
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Reolmarkedet.UI.ViewModels
@@ -40,8 +41,8 @@ namespace Reolmarkedet.UI.ViewModels
                 return CurrentViewModel switch
                 {
                     HomeViewModel => "Home",
-                    ShelfViewModel => "Shelves",
-                    LeaseViewModel => "Leases",
+                    ShelfOverviewViewModel => "Shelves",
+                    LeaseOverviewViewModel => "Leases",
                     TenantViewModel => "Tenants",
                     _ => "Home"
                 };
