@@ -29,7 +29,7 @@ public class Tenant
             }
         }
     }
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+
 
     private string _lastName;
     public string LastName
