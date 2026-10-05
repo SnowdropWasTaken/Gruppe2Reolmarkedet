@@ -1,5 +1,6 @@
 ﻿using Reolmarkedet.Core.Interfaces;
 using Reolmarkedet.Core.Models;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,22 +12,25 @@ namespace Reolmarkedet.Core.Repositories
         private List<Tenant> _tenants = new List<Tenant>();
         private int _nextId = 1;
 
-        
+
         public Tenant? GetById(int tenantID)
         {
-            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
-            return _tenants.Find(t => t.ID == tenantID);
+            return _tenants.Find(t => t.TenantId == tenantID);
         }
 
-        public Tenant? Get(string searchTerm)
+        public Tenant? GetByPhone(string phone)
         {
-            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
-            return new Tenant("","","");
+            return _tenants.Find(t => t.Phone == phone);
         }
 
         public List<Tenant>? Search(string searchTerm)
         {
-            return new List<Tenant>(_tenants.Where(t => t.FirstName.Contains(searchTerm) || t.LastName.Contains(searchTerm))).ToList();
+            return _tenants.Where(t => 
+                                  t.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || 
+                                  t.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                  t.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                  t.Phone.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                                  ).ToList();
         }
         
         public List<Tenant> GetAll()
@@ -42,7 +46,7 @@ namespace Reolmarkedet.Core.Repositories
             return tenant.TenantId;
         }
 
-        public void UpdateTenant(Tenant tenant)
+        public void Update(Tenant tenant)
         {
             var existingTenant = GetById(tenant.TenantId);
             if (existingTenant != null) {
@@ -59,6 +63,23 @@ namespace Reolmarkedet.Core.Repositories
             if (existingTenant != null)
                 _tenants.Remove(existingTenant);
             
+        }
+
+        public void AttachBankAccount(int tenantId, BankAccount bankAccount)
+        {
+            var existingTenant = GetById(tenantId);
+
+            if (existingTenant == null)
+            {
+                throw new ArgumentException($"Ingen lejer fundet med ID {tenantId}.");
+            }
+
+            if (bankAccount == null)
+            {
+                throw new ArgumentNullException(nameof(bankAccount), "Bankkonto må ikke være null.");
+            }
+
+            existingTenant.BankAccount = bankAccount;
         }
 
     }

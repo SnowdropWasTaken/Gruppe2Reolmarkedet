@@ -16,6 +16,9 @@ namespace Reolmarkedet.Core.Interfaces
         int Insert(Tenant tenant);
         void Update(Tenant tenant);
         void Delete(int tenantID);
+
+        // Attach a bank account to a tenant
+        void AttachBankAccount(int tenantId, BankAccount bankAccount);
     }
 }
 
@@ -23,4 +26,5 @@ namespace Reolmarkedet.Core.Interfaces
 // Vi har brug for at kunne hente en lejer ud fra deres ID, og vi har brug for at kunne hente en lejer ud fra deres telefonnummer.
 // Vi har også brug for at kunne søge efter lejere ud fra et søgeord f.eks. deres fornavn eller efternavn, og vi har brug for at kunne hente alle lejere.
 // Vi har også brug for at kunne indsætte en ny lejer, opdatere en eksisterende lejer og slette en lejer.
+// Vi har også brug for at kunne tilknytte en bankkonto til en ny lejer, så vi kan udbetale overskuddet til deres konto.
 // Andet?
