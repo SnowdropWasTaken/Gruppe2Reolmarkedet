@@ -1,6 +1,6 @@
 ﻿namespace Reolmarkedet.UI.ViewModels;
 
-public class ShelfOverviewViewModel
+public class ShelfOverviewViewModel : ViewModelBase
 {
     
 }

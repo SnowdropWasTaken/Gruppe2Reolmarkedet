@@ -2,17 +2,31 @@
 
 public class Lease
 {
-    public int ID;
+    public int LeaseId;
     private DateTime _startDate;
-    
-    private double _price;
+    public DateTime StartDate
+    {
+<<<<<<< HEAD
+        get => _startDate;
+        set => _startDate = value;
+               
+    }
 
-    public double Price
+    private double _price;
+=======
+        get { return _startDate; }
+        set { _startDate = value; }
+    }
+    
+    private decimal _price;
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+
+    public decimal Price
     {
         get => _price;
         set
         {
-            if (value != null && value > 0)
+            if (value > 0)
             {
                 _price = value;
             }
@@ -23,43 +37,61 @@ public class Lease
         }
     }
     
-    private DateTime? _cancellationDate;
+    private DateTime? _terminationDate;
 
-    public DateTime? CancellationDate
+    public DateTime? TerminationDate
     {
-        get => _cancellationDate;
+        get => _terminationDate;
         set
         {
-            // Awful nesting incoming
-            if (value.HasValue)
+            if (!value.HasValue)
             {
-                if (value.Value.Month == DateTime.Now.Month)
-                {
-                    if (value.Value.Day < 20)
-                    {
-                        // Last day of the month
-                        _cancellationDate = new DateTime(value.Value.Year, value.Value.Month,
-                            DateTime.DaysInMonth(value.Value.Year, value.Value.Month));
-                    }
-                    else
-                    {
-                        // Last day of next month
-                        _cancellationDate = new DateTime(value.Value.Year, value.Value.Month + 1,
-                            DateTime.DaysInMonth(value.Value.Year, value.Value.Month + 1));
-                    }
-                }
-                else
-                {
-                    // Last day of the set month
-                    _cancellationDate = new DateTime(value.Value.Year, value.Value.Month,
-                        DateTime.DaysInMonth(value.Value.Year, value.Value.Month));
-                }
+                _terminationDate = null;
+                return;
             }
-            else
-            {
-                throw new ArgumentException("Cancellation date must be a date, to be set");
-            }
+
+            var requestDate = value.Value;
+
+            // Opsigelsesfrist den 20.: anmodes før den 20. i måneden,
+            // træder opsigelsen i kraft ved udgangen af indeværende måned.
+            // Anmodes den 20. eller senere, udskydes den til udgangen af næste måned.
+            int monthsAhead = requestDate.Day < 20 ? 1 : 2;
+
+            _terminationDate = new DateTime(requestDate.Year, requestDate.Month, 1)
+                .AddMonths(monthsAhead)
+                .AddDays(-1);
         }
+
+            // Awful nesting incoming
+            //if (value.HasValue)
+            //{
+            //    if (value.Value.Month == DateTime.Now.Month)
+            //    {
+            //        if (value.Value.Day < 20)
+            //        {
+            //            // Last day of the month
+            //            _cancellationDate = new DateTime(value.Value.Year, value.Value.Month,
+            //                DateTime.DaysInMonth(value.Value.Year, value.Value.Month));
+            //        }
+            //        else
+            //        {
+            //            // Last day of next month
+            //            _cancellationDate = new DateTime(value.Value.Year, value.Value.Month + 1,
+            //                DateTime.DaysInMonth(value.Value.Year, value.Value.Month + 1));
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // Last day of the set month
+            //        _cancellationDate = new DateTime(value.Value.Year, value.Value.Month,
+            //            DateTime.DaysInMonth(value.Value.Year, value.Value.Month));
+            //    }
+            //}
+            //else
+            //{
+            //    throw new ArgumentException("Cancellation date must be a date, to be set");
+            //}
+        //}
     }
     
     private Shelf _shelf;
@@ -67,6 +99,7 @@ public class Lease
     public Shelf Shelf
     {
         get => _shelf;
+        set => _shelf = value;
     }
 
     private Tenant _tenant;
@@ -74,17 +107,18 @@ public class Lease
     public Tenant Tenant
     {
         get => _tenant;
+        set => _tenant = value;
     }
 
-    public Lease(DateTime startDate, double price, Shelf shelf, Tenant tenant, DateTime? cancellationDate = null)
+    public Lease(DateTime startDate, decimal price, Shelf shelf, Tenant tenant, DateTime? terminationDate = null)
     {
         _startDate = startDate;
         Price = price;
         _shelf = shelf;
         _tenant = tenant;
-        if (cancellationDate != null)
+        if (terminationDate != null)
         {
-            CancellationDate = cancellationDate;
+            TerminationDate = terminationDate;
         }
     }
     
