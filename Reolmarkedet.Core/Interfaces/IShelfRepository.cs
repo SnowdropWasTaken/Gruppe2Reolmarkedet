@@ -9,6 +9,7 @@ namespace Reolmarkedet.Core.Interfaces
     {
         Shelf? GetById(int shelfID);
         List<Shelf> GetAll();
+        List<Shelf> Search(string searchTerm);
         int Insert(Shelf shelf);
         void Update(Shelf shelf);
         void Delete(int shelfID);
