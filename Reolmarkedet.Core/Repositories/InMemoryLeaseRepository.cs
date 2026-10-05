@@ -12,6 +12,7 @@ namespace Reolmarkedet.Core.Repositories
         private int _nextId = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Lease? Get (int leaseID)
         {
             return _leases.Find(l => l.ID == leaseID); 
@@ -27,13 +28,22 @@ namespace Reolmarkedet.Core.Repositories
         {
             return _leases.Find(l => l.LeaseId == leaseID);
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+=======
+
+        public Lease? GetById(int leaseID)
+        {
+            return _leases.Find(l => l.LeaseId == leaseID);
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         }
 
         public List<Lease> GetAll()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             return new List<Lease>(_leases);
 =======
+=======
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
             return new List<Lease>(_leases).ToList();
                   
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
@@ -42,7 +52,11 @@ namespace Reolmarkedet.Core.Repositories
         public int Insert(Lease lease)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             lease.ID = _nextId++;
+=======
+            lease.LeaseId = _nextId++;
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
 =======
             lease.LeaseId = _nextId++;
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
@@ -52,6 +66,7 @@ namespace Reolmarkedet.Core.Repositories
 
         public void Update(Lease lease)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             var existingLease = Get(lease.ID);
             if (existingLease != null)
@@ -65,6 +80,17 @@ namespace Reolmarkedet.Core.Repositories
         }
 
         public void RemoveLease(int leaseID)
+=======
+            var existingLease = GetById(lease.LeaseId);
+            if (existingLease != null)
+            {
+                existingLease.StartDate = lease.StartDate;
+                existingLease.TerminationDate = lease.TerminationDate;
+            }
+        }
+
+        public void Delete(int leaseId)
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
 =======
             var existingLease = GetById(lease.LeaseId);
             if (existingLease != null)

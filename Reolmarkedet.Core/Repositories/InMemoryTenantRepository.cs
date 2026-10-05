@@ -15,7 +15,11 @@ namespace Reolmarkedet.Core.Repositories
         public Tenant? GetById(int tenantID)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             return _tenants.Find(t => t.ID == tenantID);
+=======
+            return _tenants.Find(t => t.TenantId == tenantID);
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
 =======
             return _tenants.Find(t => t.TenantId == tenantID);
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
@@ -23,6 +27,7 @@ namespace Reolmarkedet.Core.Repositories
 
         public Tenant? GetByPhone(string phone)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             if (string.IsNullOrWhiteSpace(searchTerm))
                 throw new ArgumentNullException("Søgning må ikke være tom", nameof(searchTerm));
@@ -36,12 +41,15 @@ namespace Reolmarkedet.Core.Repositories
             t.BankNumber == searchTerm); 
             
 =======
+=======
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
             return _tenants.Find(t => t.Phone == phone);
         }
 
         public List<Tenant>? Search(string searchTerm)
         {
             return new List<Tenant>(_tenants.Where(t => t.FirstName.Contains(searchTerm) || t.LastName.Contains(searchTerm))).ToList();
+<<<<<<< HEAD
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         }
         
@@ -65,6 +73,23 @@ namespace Reolmarkedet.Core.Repositories
             return tenant.TenantId;
         }
 
+=======
+        }
+        
+        public List<Tenant> GetAll()
+        {   //Skal tilføje firstname og last name til Tenant klassen, så vi kan sortere på det.
+            //LINQ er blevet brugt - da vi vil koble db 
+            return new List<Tenant>(_tenants).ToList();
+        }
+
+        public int Insert(Tenant tenant)
+        {   
+            tenant.TenantId = _nextId++;
+            _tenants.Add(tenant);
+            return tenant.TenantId;
+        }
+
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         public void Update(Tenant tenant)
         {
             var existingTenant = GetById(tenant.TenantId);

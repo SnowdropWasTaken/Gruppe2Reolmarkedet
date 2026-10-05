@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Reolmarkedet.UI"
 <<<<<<< HEAD
+<<<<<<< HEAD
              xmlns:views="clr-namespace:Reolmarkedet.UI.Views"
              xmlns:viewModels="clr-namespace:Reolmarkedet.UI.ViewModels">
     
@@ -21,6 +22,8 @@
             <views::HomeView />
         </DataTemplate>
 =======
+=======
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
              xmlns:viewModels="clr-namespace:Reolmarkedet.UI.ViewModels"
              xmlns:views="clr-namespace:Reolmarkedet.UI.Views"
              StartupUri="MainWindow.xaml">

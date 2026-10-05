@@ -10,6 +10,7 @@ public class Tenant
     {
         get => _firstName;
 <<<<<<< HEAD
+<<<<<<< HEAD
         set => _firstName = value;
     }
     private string _lastName;
@@ -33,6 +34,20 @@ public class Tenant
             }
         }
     }
+=======
+        set
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                _firstName = value;
+            }
+            else
+            {
+                throw new ArgumentException("First name cannot be empty");
+            }
+        }
+    }
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
 
     private string _lastName;
     public string LastName
@@ -52,6 +67,9 @@ public class Tenant
     }
 
 
+<<<<<<< HEAD
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+=======
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
     private string _email;
 
@@ -96,6 +114,7 @@ public class Tenant
     public BankAccount? BankAccount { get; set; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Tenant(string firstName, String lastName, string email, string phone, string regNumber, string bankNumber)
     {
         _firstName = firstName;
@@ -110,6 +129,59 @@ public class Tenant
     {
         _firstName = firstName;
         _lastName= lastName;
+=======
+    //private string? _regNumber;
+
+    //public string RegNumber
+    //{
+    //    get => _regNumber;
+    //    set {
+    //        // Check to see if its actually a number
+    //        if (int.TryParse(value, out int result))
+    //        {
+    //            _regNumber = value;
+    //        }
+    //        else
+    //        {
+    //            throw new ArgumentException("Invalid registration number");
+    //        }
+    //    }
+    //}
+
+
+    //private string? _bankNumber;
+
+    //public string BankNumber
+    //{
+    //    get => _bankNumber;
+    //    set {
+    //        // Check to see if its actually a number
+    //        if (int.TryParse(value, out int result))
+    //        {
+    //            _bankNumber = value;
+    //        }
+    //        else
+    //        {
+    //            throw new ArgumentException("Invalid bank number");
+    //        }
+    //    }
+    //}
+
+    //public Tenant(string firstname, string lastname, string email, string phone, string regNumber, string bankNumber)
+    //{
+    //    _firstName = firstname;
+    //    _lastName = lastname;
+    //    Email = email;
+    //    Phone = phone;
+    //    _regNumber = regNumber;
+    //    _bankNumber = bankNumber;
+    //}
+
+    public Tenant(string firstname, string lastname, string email, string phone)
+    {
+        _firstName = firstname;
+        _lastName = lastname;
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
 =======
     //private string? _regNumber;
 

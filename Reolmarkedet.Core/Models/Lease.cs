@@ -7,6 +7,7 @@ public class Lease
     public DateTime StartDate
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         get => _startDate;
         set => _startDate = value;
                
@@ -21,6 +22,14 @@ public class Lease
     private decimal _price;
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
 
+=======
+        get { return _startDate; }
+        set { _startDate = value; }
+    }
+    
+    private decimal _price;
+
+>>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
     public decimal Price
     {
         get => _price;
