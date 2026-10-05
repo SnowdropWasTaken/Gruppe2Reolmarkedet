@@ -22,13 +22,8 @@ namespace Reolmarkedet.Core.Interfaces
     public interface ITenantRepository
     {
         Tenant? Get(int tenantID);
-
         Tenant? Get(string searchTerm);
-    
-        Tenant? GetById(int tenantID);
-        Tenant? GetByPhone(string phone);
-        List<Tenant>? Search(string searchTerm);
-
+        
         List<Tenant> GetAll();
 
         int Insert(Tenant tenant);

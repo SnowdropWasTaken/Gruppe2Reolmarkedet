@@ -14,66 +14,19 @@ namespace Reolmarkedet.Core.Repositories
         
         public Tenant? GetById(int tenantID)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
+            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
             return _tenants.Find(t => t.ID == tenantID);
-=======
-            return _tenants.Find(t => t.TenantId == tenantID);
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-=======
-            return _tenants.Find(t => t.TenantId == tenantID);
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         }
 
-        public Tenant? GetByPhone(string phone)
+        public Tenant? Get(string searchTerm)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if (string.IsNullOrWhiteSpace(searchTerm))
-                throw new ArgumentNullException("Søgning må ikke være tom", nameof(searchTerm));
-           
-            return _tenants.Find(t =>
-            t.FirstName == searchTerm ||
-            t.LastName == searchTerm ||
-            t.Email == searchTerm ||
-            t.Phone == searchTerm ||
-            t.RegNumber == searchTerm ||
-            t.BankNumber == searchTerm); 
-            
-=======
-=======
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-            return _tenants.Find(t => t.Phone == phone);
+            //vi har ikke tilføjet tenantID til klassen Tenant endnu 
+            return new Tenant("","","");
         }
 
         public List<Tenant>? Search(string searchTerm)
         {
             return new List<Tenant>(_tenants.Where(t => t.FirstName.Contains(searchTerm) || t.LastName.Contains(searchTerm))).ToList();
-<<<<<<< HEAD
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-        }
-        
-        public List<Tenant> GetAll()
-        {   
-            //LINQ er blevet brugt - da vi vil koble db 
-            return new List<Tenant>(_tenants).ToList();
-        }
-
-        public int Insert(Tenant tenant)
-        {   
-<<<<<<< HEAD
-            if (tenant == null)
-                throw new ArgumentNullException(nameof(tenant));
-
-            tenant.ID = _nextId++;
-=======
-            tenant.TenantId = _nextId++;
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-            _tenants.Add(tenant);
-            return tenant.TenantId;
-        }
-
-=======
         }
         
         public List<Tenant> GetAll()
@@ -89,8 +42,7 @@ namespace Reolmarkedet.Core.Repositories
             return tenant.TenantId;
         }
 
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-        public void Update(Tenant tenant)
+        public void UpdateTenant(Tenant tenant)
         {
             var existingTenant = GetById(tenant.TenantId);
             if (existingTenant != null) {

@@ -26,62 +26,25 @@ namespace Reolmarkedet.Core.Repositories
 
         public Lease? GetById(int leaseID)
         {
-            return _leases.Find(l => l.LeaseId == leaseID);
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-=======
-
-        public Lease? GetById(int leaseID)
-        {
-            return _leases.Find(l => l.LeaseId == leaseID);
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+            return _leases.Find(l => l.LeaseID == leaseID);
         }
 
         public List<Lease> GetAll()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
             return new List<Lease>(_leases);
-=======
-=======
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-            return new List<Lease>(_leases).ToList();
                   
 >>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         }
 
         public int Insert(Lease lease)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            lease.ID = _nextId++;
-=======
-            lease.LeaseId = _nextId++;
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-=======
-            lease.LeaseId = _nextId++;
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+            lease.LeaseID = _nextId++;
             _leases.Add(lease);
-            return lease.LeaseId;
         }
 
-        public void Update(Lease lease)
+        public void UpdateLease(Lease lease)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            var existingLease = Get(lease.ID);
-            if (existingLease != null)
-            {
-                existingLease.Tenant = lease.Tenant;
-                existingLease.Shelf = lease.Shelf;
-                existingLease.StartDate = lease.StartDate;
-                existingLease.Price = lease.Price;
-                existingLease.CancellationDate = lease.CancellationDate;
-            }
-        }
-
-        public void RemoveLease(int leaseID)
-=======
-            var existingLease = GetById(lease.LeaseId);
+            var existingLease = GetById(lease.LeaseID);
             if (existingLease != null)
             {
                 existingLease.StartDate = lease.StartDate;
@@ -89,19 +52,7 @@ namespace Reolmarkedet.Core.Repositories
             }
         }
 
-        public void Delete(int leaseId)
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-=======
-            var existingLease = GetById(lease.LeaseId);
-            if (existingLease != null)
-            {
-                existingLease.StartDate = lease.StartDate;
-                existingLease.TerminationDate = lease.TerminationDate;
-            }
-        }
-
-        public void Delete(int leaseId)
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+        public void RemoveLease(int leaseId)
         {
             var lease = Get(leaseID);   
             if (lease != null)           

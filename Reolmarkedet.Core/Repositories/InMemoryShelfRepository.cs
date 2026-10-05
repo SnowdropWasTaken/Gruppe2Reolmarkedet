@@ -13,11 +13,10 @@ namespace Reolmarkedet.Core.Repositories
         private int _nextId = 1;
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public Shelf? Get(int shelfID)
+        public Shelf GetById(int shelfID)
         {
-            return _shelves.Find(s => s.ID == shelfID);
+            //Vi har ikke tilføjet shelfID til klassen Shelf endnu.
+            return _shelves.Find(s => s.shelfID == shelfID);
         }
 
         public Shelf? Get(string searchTerm)
@@ -47,47 +46,16 @@ namespace Reolmarkedet.Core.Repositories
 
         public int Insert(Shelf shelf)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            shelf.ID = _nextId++;
+            shelf.ShelfID = _nextId++;
             _shelves.Add(shelf);    
-=======
-            shelf.ShelfId = _nextId++;
-            _shelves.Add(shelf);
-            return shelf.ShelfId;
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-=======
-            shelf.ShelfId = _nextId++;
-            _shelves.Add(shelf);
-            return shelf.ShelfId;
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         }
 
-        public void Update(Shelf shelf)
+        public void UpdateShelf(Shelf shelf)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            var existingShelf = _shelves.Find(s => s.ID == shelf.ID);
-
-            if (existingShelf != null) 
-            { 
-                existingShelf.ShelfName = shelf.ShelfName;
-                existingShelf.ShelfType = shelf.ShelfType;
+            var existingShelf = _shelves.Find(s => s.ShelfID == shelf.ShelfID);
+            if (existingShelf != null) { 
+            
             }  
-=======
-=======
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-            var existingShelf = _shelves.Find(s => s.ShelfId == shelf.ShelfId);
-            if (existingShelf != null)
-            {
-                existingShelf.ShelfName = shelf.ShelfName;
-                existingShelf.ShelfType = shelf.ShelfType;
-                existingShelf.Status = shelf.Status;
-            }
-<<<<<<< HEAD
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
-=======
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
         }
 
         public void Delete(int shelfID)
