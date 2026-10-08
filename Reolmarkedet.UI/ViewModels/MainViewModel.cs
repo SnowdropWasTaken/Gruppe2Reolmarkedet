@@ -36,24 +36,32 @@ namespace Reolmarkedet.UI.ViewModels
 
         public string WindowTitle
         {
-            get
+            //Midlertidig løsning, intil vores ViewModels er klar.
+            get => CurrentViewModel switch
             {
-                return CurrentViewModel switch
-                {
+                _ => "ReolMarkeret"
+            }; 
 
-                    HomeViewModel => "Home",
-                    ShelfViewModel => "Shelves",
-                    LeaseViewModel => "Leases",
-                    TenantViewModel => "Tenants",
-                    _ => "Home"
-                };
-            }
+            //TODO: Opdater WindowTitle, så titlen afhænger af den aktive viewmodel 
+            //get
+            //{
+            //    return CurrentViewModel switch
+            //    {
+
+            //        HomeViewModel => "Home",
+            //        ShelfViewModel => "Shelves",
+            //        LeaseViewModel => "Leases",
+            //        TenantViewModel => "Tenants",
+            //        _ => "Home"
+            //    };
+           // }
         }
 
         //Constructor vælger start viewmodel, som er HomeViewModel
         public MainViewModel()
         {
-            CurrentViewModel = new HomeViewModel();
+            //TODO Aktiver, når HomeViewModel er klar. 
+           // CurrentViewModel = new HomeViewModel();
         }
 
 

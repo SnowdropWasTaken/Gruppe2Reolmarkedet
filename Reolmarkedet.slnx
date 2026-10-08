@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Reolmarkedet.Core/Reolmarkedet.Core.csproj" />
+  <Project Path="Reolmarkedet.Tests/Reolmarkedet.Tests.csproj" Id="1ad509a5-03bd-429e-8b06-6563a73f1c8e" />
   <Project Path="Reolmarkedet.UI/Reolmarkedet.UI.csproj" />
 </Solution>
