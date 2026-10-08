@@ -20,9 +20,9 @@
             <views:LeaseOverviewView />
         </DataTemplate>
         
-        <DateTemplate Datatype="{x:Type viewModels:TenantViewModel}">
+        <DataTemplate Datatype="{x:Type viewModels:TenantViewModel}">
             <views:TenantView />
-        </DateTemplate>
+        </DataTemplate>
         
     </Application.Resources>
 </Application>
