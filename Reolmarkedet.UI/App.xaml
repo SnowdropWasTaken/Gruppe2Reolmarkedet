@@ -22,12 +22,7 @@
         
         <DataTemplate Datatype="{x:Type viewModels:TenantViewModel}">
             <views:TenantView />
-<<<<<<< HEAD
         </DataTemplate>
         
-=======
-        </DateTemplate>
-       --> 
->>>>>>> c8befd0ddb592478c9b419a8ffe73cedb6c7b010
     </Application.Resources>
 </Application>
