@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Reolmarkedet.UI"
              xmlns:views="clr-namespace:Reolmarkedet.UI.Views"
-             xmlns:viewModels="clr-namespace:Reolmarkedet.UI.ViewModels"
-    StartupUri="MainWindow.xaml">
+             xmlns:viewModels="clr-namespace:Reolmarkedet.UI.ViewModels">
     <Application.Resources>
         
          <!--Opretter forbindelse mellem View og ViewModel-->
-        <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+        
+        <!-- <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
             <views:HomeView />
         </DataTemplate>
         
@@ -20,9 +20,9 @@
             <views:LeaseOverviewView />
         </DataTemplate>
         
-        <DateTemplate Datatype="{x:Type viewModels:TenantViewModel}">
+        <DataTemplate Datatype="{x:Type viewModels:TenantViewModel}">
             <views:TenantView />
-        </DateTemplate>
+        </DataTemplate>
         
     </Application.Resources>
 </Application>

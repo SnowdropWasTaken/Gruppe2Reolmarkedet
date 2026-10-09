@@ -3,20 +3,12 @@
 public class Tenant
 {
     public int TenantId;
-    
-    private string _firstName;
 
+    //  Tilføjer en firstname property til Tenant klassen, så vi kan gemme fornavn.
+    private string _firstName;
     public string FirstName
     {
-        get => _name;
-    }
-    
-    
-    private string _email;
-
-    public string Email
-    {
-        get => _email;
+        get => _firstName;
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -30,7 +22,7 @@ public class Tenant
         }
     }
 
-
+    // Tilføjer en lastName property til Tenant klassen, så vi kan gemme efternavn.
     private string _lastName;
     public string LastName
     {
@@ -47,58 +39,62 @@ public class Tenant
             }
         }
     }
-    
-    
-    private string? _regNumber;
 
-    public string RegNumber
+    // Tilføjer en email property til Tenant klassen, så vi kan gemme email.
+    private string _email;
+    public string Email
     {
-        get => _regNumber;
-        set {
-            // Check to see if its actually a number
-            if (int.TryParse(value, out int result))
+        get => _email;
+        set
+        {
+            if (value != null && value.Contains("@") && value.Contains("."))
             {
-                _regNumber = value;
+                // Removes all whitespace from the string
+                _email = String.Concat(value.Where(c => !Char.IsWhiteSpace(c)));
             }
             else
             {
-                throw new ArgumentException("Invalid registration number");
-            }
-        }
-    }
-    
-    
-    private string? _bankNumber;
-
-    public string BankNumber
-    {
-        get => _bankNumber;
-        set {
-            // Check to see if its actually a number
-            if (int.TryParse(value, out int result))
-            {
-                _bankNumber = value;
-            }
-            else
-            {
-                throw new ArgumentException("Invalid bank number");
+                throw new ArgumentException("Invalid email address");
             }
         }
     }
 
-    public Tenant(string name, string email, string phone, string regNumber, string bankNumber)
+    // Tilføjer en phone property til Tenant klassen, så vi kan gemme telefonnummer.
+    private string _phone;
+    public string Phone
     {
-        _name = name;
-        Email = email;
-        Phone = phone;
-        _regNumber = regNumber;
-        _bankNumber = bankNumber;
+        get => _phone;
+        set
+        {
+            if (value != null && value.Length > 7)
+            {
+                // Removes all whitespace from the string
+                _phone = String.Concat(value.Where(c => !Char.IsWhiteSpace(c)));
+            }
+            else
+            {
+                throw new ArgumentException("Invalid phone number");
+            }
+        }
     }
 
-    public Tenant(string name, string email, string phone)
+    // Tilføjer en bankkonto til Tenant klassen, så vi kan gemme reg og bank nummer.
+    public BankAccount? BankAccount { get; set; }
+
+
+    // Constructor for nye lejere, der skal på venteliste - hvorfor vi ikke har deres bankoplysninger endnu.
+    public Tenant(string firstname, string lastname, string email, string phone)
     {
-        _name = name;
+        _firstName = firstname;
+        _lastName = lastname;
         Email = email;
         Phone = phone;
+    }
+
+    // Constructor for nye aktive lejere, hvor bankoplysninger gives samtidig, og derfor kan oprettes ved samme lejlighed.
+    public Tenant(string firstname, string lastname, string email, string phone, BankAccount bankAccount)
+    : this(firstname, lastname, email, phone)
+    {
+        BankAccount = bankAccount;
     }
 }

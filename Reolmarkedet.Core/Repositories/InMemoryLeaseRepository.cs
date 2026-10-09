@@ -1,5 +1,6 @@
 ﻿using Reolmarkedet.Core.Interfaces;
 using Reolmarkedet.Core.Models;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,40 +12,35 @@ namespace Reolmarkedet.Core.Repositories
         private readonly List<Lease> _leases = new List<Lease>();
         private int _nextId = 1;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public Lease? Get (int leaseID)
-        {
-            return _leases.Find(l => l.ID == leaseID); 
-        }
-        public Lease? Get (string searchTerm)
-        {
-             return _leases.Find(l => 
-             l.Tenant.FirstName == searchTerm ||
-             l.Shelf.ShelfName == searchTerm);    
-=======
-
         public Lease? GetById(int leaseID)
         {
-            return _leases.Find(l => l.LeaseID == leaseID);
+            return _leases.Find(l => l.LeaseId == leaseID);
+        }
+
+        public List<Lease> Search(string searchTerm)
+        {
+            return _leases.Where(l =>
+                l.Tenant.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || // Sørger for at 'Per' og 'per' bliver fundet, ved at ignorere case-sensitivitet.
+                l.Tenant.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                l.Shelf.ShelfName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
         }
 
         public List<Lease> GetAll()
         {
-            return new List<Lease>(_leases);
-                  
->>>>>>> 6dcdbbd80aac4e4e1dda8895424cb4deb4bd308d
+            return new List<Lease>(_leases).ToList();
         }
 
         public int Insert(Lease lease)
         {
-            lease.LeaseID = _nextId++;
+            lease.LeaseId = _nextId++;
             _leases.Add(lease);
+            return lease.LeaseId;
         }
 
-        public void UpdateLease(Lease lease)
+        public void Update(Lease lease)
         {
-            var existingLease = GetById(lease.LeaseID);
+            var existingLease = GetById(lease.LeaseId);
             if (existingLease != null)
             {
                 existingLease.StartDate = lease.StartDate;
@@ -52,10 +48,10 @@ namespace Reolmarkedet.Core.Repositories
             }
         }
 
-        public void RemoveLease(int leaseId)
+        public void Delete(int leaseId)
         {
-            var lease = Get(leaseID);   
-            if (lease != null)           
+            var lease = GetById(leaseId);   // Find the lease by ID
+            if (lease != null)              // Hvis der er et match slettes lease 
             {
                 _leases.Remove(lease);
             }
